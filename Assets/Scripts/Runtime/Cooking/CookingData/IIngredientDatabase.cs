@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Cooking.CookingData
+namespace Cooking
 {
     public interface IIngredientDatabase
     {

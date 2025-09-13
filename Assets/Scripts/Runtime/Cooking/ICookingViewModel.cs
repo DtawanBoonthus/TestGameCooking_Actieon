@@ -7,7 +7,6 @@ namespace Cooking
     public interface ICookingViewModel
     {
         ReadOnlyReactiveProperty<CookingState> CurrentCookingState { get; }
-        ReadOnlyReactiveProperty<int> FoodCount { get; }
         UniTask StartCookingAsync(CancellationToken cancellationToken);
     }
 }

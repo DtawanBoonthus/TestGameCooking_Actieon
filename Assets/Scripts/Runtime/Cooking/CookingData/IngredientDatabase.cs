@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Cooking.CookingData
+namespace Cooking
 {
     [CreateAssetMenu(fileName = "IngredientDatabase", menuName = "Database/Ingredient", order = 1)]
     public class IngredientDatabase : ScriptableObject, IIngredientDatabase

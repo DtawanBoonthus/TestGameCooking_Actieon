@@ -1,31 +1,22 @@
 ﻿using System;
 using System.Threading;
-using Cooking.CookingData;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace Cooking
 {
-    public class CookingViewModel : ICookingViewModel, IStartable, IDisposable
+    public class CookingViewModel : ICookingViewModel, IDisposable
     {
         private readonly ReactiveProperty<CookingState> currentCookingState = new(CookingState.Preparing);
-        private readonly ReactiveProperty<int> foodCount = new(0);
         private readonly CompositeDisposable disposables = new();
 
         public ReadOnlyReactiveProperty<CookingState> CurrentCookingState => currentCookingState;
-        public ReadOnlyReactiveProperty<int> FoodCount => foodCount;
 
+        [Inject] private readonly IGameConfigDatabase gameConfigDatabase = null!;
         [Inject] private readonly IFoodDatabase foodDatabase = null!;
         [Inject] private readonly IIngredientDatabase ingredientDatabase = null!;
-
-        public void Start()
-        {
-            Debug.Log($"{nameof(CookingViewModel)}: Started");
-            foodCount.Value = foodDatabase.Foods.Count;
-        }
 
         public async UniTask StartCookingAsync(CancellationToken cancellationToken)
         {

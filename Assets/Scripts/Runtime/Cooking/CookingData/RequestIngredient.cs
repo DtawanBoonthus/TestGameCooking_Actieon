@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Cooking.CookingData;
+namespace Cooking;
 
 [Serializable]
 public record RequestIngredient
