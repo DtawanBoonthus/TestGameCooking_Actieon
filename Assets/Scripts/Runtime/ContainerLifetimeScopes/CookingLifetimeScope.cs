@@ -1,4 +1,5 @@
-﻿using Cooking.Services;
+﻿using System;
+using Cooking.Services;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -16,7 +17,7 @@ namespace Cooking.ContainerLifetimeScopes
             builder.RegisterInstance<IFoodDatabase>(foodDatabase);
             builder.RegisterInstance<IIngredientDatabase>(ingredientDatabase);
             builder.Register<ICookingPauseViewModel, CookingPauseViewModel>(Lifetime.Scoped);
-            builder.Register<ICookingViewModel, CookingViewModel>(Lifetime.Scoped);
+            builder.Register<ICookingViewModel, CookingViewModel>(Lifetime.Scoped).As<IAsyncStartable, IDisposable>();
             builder.Register<IFoodRecipeViewModel, FoodRecipeViewModel>(Lifetime.Scoped);
         }
     }

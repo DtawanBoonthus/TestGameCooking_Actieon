@@ -686,7 +686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4552772236188895767, guid: 447b516b0b448e545a624a80d6866644, type: 3}
       propertyPath: m_Transition
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4552772236188895767, guid: 447b516b0b448e545a624a80d6866644, type: 3}
       propertyPath: m_SpriteState.m_SelectedSprite
@@ -862,6 +862,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 93886773564669134}
   m_SourcePrefab: {fileID: 100100000, guid: 447b516b0b448e545a624a80d6866644, type: 3}
+--- !u!114 &1851783816868911383 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4281350850155930699, guid: 447b516b0b448e545a624a80d6866644, type: 3}
+  m_PrefabInstance: {fileID: 2510953037285408092}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3213583326017788950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab3ffc484294e94b6223c9c057cb534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3213583326017788950 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1026894905776873802, guid: 447b516b0b448e545a624a80d6866644, type: 3}
@@ -879,12 +890,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b033a4ab0484fab83e3c6e67c462a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodRecipeButton: {fileID: 1851783816868911383}
   foodImage: {fileID: 100535043355730453}
   foodNameTMP: {fileID: 6790747930252863867}
   rankIcons:
   - {fileID: 7116222378793398248}
   - {fileID: 8569257292335962929}
   - {fileID: 2476416504318978124}
+  selectedSprite: {fileID: 21300000, guid: fc3734a75a284ba4cad363a26d45b552, type: 3}
+  unselectedSprite: {fileID: 21300000, guid: 6852813bfbea0bd4cadd1cc88d5308ba, type: 3}
 --- !u!224 &6820659503059907990 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8971007549190080714, guid: 447b516b0b448e545a624a80d6866644, type: 3}

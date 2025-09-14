@@ -9,6 +9,7 @@ public interface IFoodRecipeViewModel
     ReadOnlyReactiveProperty<int> CurrentPageIndex { get; }
     ReadOnlyReactiveProperty<IReadOnlyList<string>> CurrentFoodIdsInPage { get; }
     ReadOnlyReactiveProperty<int> CurrentCountFoodIds { get; }
+    ReadOnlyReactiveProperty<string> CurrentFoodId { get; }
 
     /// <summary>
     /// Recalculates and updates the total number of recipe pages 
@@ -28,4 +29,7 @@ public interface IFoodRecipeViewModel
     void PreviousPage();
     void FilterFoodRecipeBy(FilterFoodRecipeType filterFoodRecipeType);
     Food GetFood(string foodId);
+    Ingredient GetIngredient(string ingredientId);
+    IPlayerData PlayerData { get; }
+    void UpdateCurrentFoodId(string foodId);
 }

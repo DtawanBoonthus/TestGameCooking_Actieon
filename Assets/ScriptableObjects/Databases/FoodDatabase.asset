@@ -20,6 +20,7 @@ MonoBehaviour:
     ingredients:
     - ingredientId: ingredient_002
       amount: 2
+    cookingTimeSecond: 10
   - id: food_002
     name: "\u0E0B\u0E32\u0E25\u0E32\u0E40\u0E1B\u0E32"
     rank: 2
@@ -31,6 +32,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_003
     name: "\u0E1B\u0E32\u0E19\u0E34\u0E1B\u0E39\u0E23\u0E34"
     rank: 3
@@ -44,6 +46,7 @@ MonoBehaviour:
       amount: 4
     - ingredientId: ingredient_004
       amount: 4
+    cookingTimeSecond: 10
   - id: food_004
     name: "\u0E2A\u0E44\u0E1B\u0E0B\u0E35\u0E48\u0E23\u0E32\u0E40\u0E21\u0E07"
     rank: 3
@@ -57,6 +60,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 60
   - id: food_005
     name: Food 5
     rank: 3
@@ -68,6 +72,7 @@ MonoBehaviour:
       amount: 2
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_006
     name: Food 6
     rank: 1
@@ -75,6 +80,7 @@ MonoBehaviour:
     ingredients:
     - ingredientId: ingredient_003
       amount: 1
+    cookingTimeSecond: 10
   - id: food_007
     name: Food 7
     rank: 2
@@ -84,6 +90,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_008
     name: Food 8
     rank: 3
@@ -97,6 +104,7 @@ MonoBehaviour:
       amount: 8
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_009
     name: Food 9
     rank: 2
@@ -106,6 +114,7 @@ MonoBehaviour:
       amount: 2
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_010
     name: Food 10
     rank: 3
@@ -119,6 +128,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_011
     name: Food 11
     rank: 1
@@ -126,6 +136,7 @@ MonoBehaviour:
     ingredients:
     - ingredientId: ingredient_002
       amount: 2
+    cookingTimeSecond: 10
   - id: food_012
     name: Food 12
     rank: 3
@@ -139,6 +150,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_013
     name: Food 13
     rank: 2
@@ -150,6 +162,7 @@ MonoBehaviour:
       amount: 2
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_014
     name: Food 14
     rank: 3
@@ -161,6 +174,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_015
     name: Food 15
     rank: 2
@@ -170,6 +184,7 @@ MonoBehaviour:
       amount: 2
     - ingredientId: ingredient_002
       amount: 2
+    cookingTimeSecond: 10
   - id: food_016
     name: Food 16
     rank: 3
@@ -183,6 +198,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_017
     name: Food 17
     rank: 3
@@ -196,6 +212,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_018
     name: Food 18
     rank: 2
@@ -205,6 +222,7 @@ MonoBehaviour:
       amount: 2
     - ingredientId: ingredient_003
       amount: 1
+    cookingTimeSecond: 10
   - id: food_019
     name: Food 19
     rank: 1
@@ -212,6 +230,7 @@ MonoBehaviour:
     ingredients:
     - ingredientId: ingredient_003
       amount: 1
+    cookingTimeSecond: 10
   - id: food_020
     name: Food 20
     rank: 3
@@ -223,6 +242,7 @@ MonoBehaviour:
       amount: 2
     - ingredientId: ingredient_003
       amount: 1
+    cookingTimeSecond: 10
   - id: food_021
     name: Food 21
     rank: 1
@@ -230,6 +250,7 @@ MonoBehaviour:
     ingredients:
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_022
     name: Food 22
     rank: 1
@@ -237,6 +258,7 @@ MonoBehaviour:
     ingredients:
     - ingredientId: ingredient_002
       amount: 2
+    cookingTimeSecond: 10
   - id: food_023
     name: Food 23
     rank: 1
@@ -244,6 +266,7 @@ MonoBehaviour:
     ingredients:
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_024
     name: Food 24
     rank: 1
@@ -251,6 +274,7 @@ MonoBehaviour:
     ingredients:
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_025
     name: Food 25
     rank: 2
@@ -264,6 +288,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 1
+    cookingTimeSecond: 10
   - id: food_026
     name: Food 26
     rank: 3
@@ -277,6 +302,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_027
     name: Food 27
     rank: 1
@@ -290,6 +316,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_028
     name: Food 28
     rank: 2
@@ -301,6 +328,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_003
       amount: 1
+    cookingTimeSecond: 10
   - id: food_029
     name: Food 29
     rank: 3
@@ -308,6 +336,7 @@ MonoBehaviour:
     ingredients:
     - ingredientId: ingredient_001
       amount: 10
+    cookingTimeSecond: 10
   - id: food_030
     name: Food 31
     rank: 2
@@ -317,6 +346,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_031
     name: Food 31
     rank: 1
@@ -326,6 +356,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_032
     name: Food 32
     rank: 3
@@ -339,6 +370,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_033
     name: Food 33
     rank: 3
@@ -352,6 +384,7 @@ MonoBehaviour:
       amount: 1
     - ingredientId: ingredient_004
       amount: 2
+    cookingTimeSecond: 10
   - id: food_034
     name: Food 34
     rank: 1
@@ -359,3 +392,4 @@ MonoBehaviour:
     ingredients:
     - ingredientId: ingredient_002
       amount: 2
+    cookingTimeSecond: 10

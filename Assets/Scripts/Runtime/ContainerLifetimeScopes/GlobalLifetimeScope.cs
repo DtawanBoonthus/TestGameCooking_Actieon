@@ -1,4 +1,5 @@
-﻿using Cooking.Services;
+﻿using System;
+using Cooking.Services;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -11,8 +12,12 @@ namespace Cooking.ContainerLifetimeScopes
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<ISaveLoadService, LocalSaveLoadService>(Lifetime.Singleton);
             builder.RegisterInstance<IGameConfigDatabase>(gameConfigDatabase);
             builder.Register<IPauseService, PauseService>(Lifetime.Singleton);
+            builder.Register<IPlayerData, MockPlayerData>(Lifetime.Singleton);
+            builder.Register<IEnergyManager, EnergyManager>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<PlayerManager>();
         }
     }
 }

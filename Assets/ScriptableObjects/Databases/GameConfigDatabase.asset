@@ -14,3 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipeCountPerPage: 4
   searchCutoffScore: 20
+  playerIngredients:
+  - ingredientId: ingredient_001
+    amount: 15
+  - ingredientId: ingredient_002
+    amount: 15
+  - ingredientId: ingredient_003
+    amount: 15
+  - ingredientId: ingredient_004
+    amount: 15
+  playerEnergy: 30
+  maxCookingEnergy: 30
+  energyRecoveryCount: 1
+  energyRecoverySeconds: 5
+  cookingEnergyCost: 10

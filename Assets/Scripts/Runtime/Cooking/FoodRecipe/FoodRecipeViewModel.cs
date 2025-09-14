@@ -14,14 +14,19 @@ public class FoodRecipeViewModel : IFoodRecipeViewModel
     private readonly ReactiveProperty<int> recipePageCount = new(-1);
     private readonly ReactiveProperty<int> currentPageIndex = new(-1);
     private readonly ReactiveProperty<int> currentCountFoodIds = new(-1);
+    private readonly ReactiveProperty<string> currentFoodId = new();
     private readonly ReactiveProperty<IReadOnlyList<string>> currentFoodIdsInPage = new(new List<string>());
     public ReadOnlyReactiveProperty<int> RecipePageCount => recipePageCount;
     public ReadOnlyReactiveProperty<int> CurrentPageIndex => currentPageIndex;
     public ReadOnlyReactiveProperty<IReadOnlyList<string>> CurrentFoodIdsInPage => currentFoodIdsInPage;
     public ReadOnlyReactiveProperty<int> CurrentCountFoodIds => currentCountFoodIds;
+    public ReadOnlyReactiveProperty<string> CurrentFoodId => currentFoodId;
 
     [Inject] private readonly IFoodDatabase foodDatabase = null!;
     [Inject] private readonly IGameConfigDatabase gameConfigDatabase = null!;
+    [Inject] private readonly IIngredientDatabase ingredientDatabase = null!;
+    [Inject] private readonly IPlayerData playerData = null!;
+
 
     private List<string> currentFoodIds = new();
     private FilterFoodRecipeType currentFilterFoodRecipeType = FilterFoodRecipeType.All;
@@ -34,6 +39,7 @@ public class FoodRecipeViewModel : IFoodRecipeViewModel
         var next = currentPageIndex.CurrentValue + 1;
         currentPageIndex.Value = next == recipePageCount.CurrentValue ? 0 : next;
         currentFoodIdsInPage.Value = GetFoodIds(currentFoodIds, currentPageIndex.CurrentValue, gameConfigDatabase.RecipeCountPerPage).ToArray();
+        currentFoodId.Value = string.Empty;
     }
 
     public void PreviousPage()
@@ -41,10 +47,12 @@ public class FoodRecipeViewModel : IFoodRecipeViewModel
         var prev = currentPageIndex.CurrentValue - 1;
         currentPageIndex.Value = prev < 0 ? recipePageCount.CurrentValue - 1 : prev;
         currentFoodIdsInPage.Value = GetFoodIds(currentFoodIds, currentPageIndex.CurrentValue, gameConfigDatabase.RecipeCountPerPage).ToArray();
+        currentFoodId.Value = string.Empty;
     }
 
     public void FilterFoodRecipeBy(FilterFoodRecipeType filterFoodRecipeType)
     {
+        currentFoodId.Value = string.Empty;
         currentFilterFoodRecipeType = filterFoodRecipeType;
         currentFoodIds = GetCurrentFoodIds();
         recipePageCount.Value = RecipeCountPerPage(currentFoodIds.Count, gameConfigDatabase.RecipeCountPerPage);
@@ -55,6 +63,18 @@ public class FoodRecipeViewModel : IFoodRecipeViewModel
     public Food GetFood(string foodId)
     {
         return foodDatabase.GetById(foodId);
+    }
+
+    public Ingredient GetIngredient(string ingredientId)
+    {
+        return ingredientDatabase.GetById(ingredientId);
+    }
+
+    public IPlayerData PlayerData => playerData;
+
+    public void UpdateCurrentFoodId(string foodId)
+    {
+        currentFoodId.Value = foodId;
     }
 
     /// <inheritdoc/>
@@ -70,6 +90,7 @@ public class FoodRecipeViewModel : IFoodRecipeViewModel
 
     public void ApplySearch(string? query)
     {
+        currentFoodId.Value = string.Empty;
         var foodIds = GetCurrentFoodIds();
         if (string.IsNullOrWhiteSpace(query))
         {

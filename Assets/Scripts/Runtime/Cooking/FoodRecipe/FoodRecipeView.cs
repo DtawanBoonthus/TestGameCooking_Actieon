@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cooking.Services;
 using Cooking.Utilities;
 using R3;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
-using System;
-using TMPro;
 
 namespace Cooking
 {
@@ -39,16 +39,22 @@ namespace Cooking
             InitializeFoodRecipeView();
             BindRecipePageChanged();
             BindCurrentFoodIdsInPage();
+            ResetFoodRecipeSelection();
         }
 
         private void OnDisable()
         {
             searchInputField.onValueChanged.RemoveListener(OnSearchChanged);
             filterFoodRecipe.OnOptionClicked -= FilterFoodRecipeOnOptionClicked;
-
+            foodRecipeViewModel.UpdateCurrentFoodId(string.Empty);
             foreach (var page in pageImages.Values)
             {
                 Destroy(page.gameObject);
+            }
+
+            foreach (var foodRecipe in foodRecipes)
+            {
+                foodRecipe.ClearClickCallback();
             }
 
             pageImages.Clear();
@@ -91,11 +97,19 @@ namespace Cooking
 
                     foodRecipes[i].SetDisplayFoodInfo(food.Name, food.Rank, sprite);
                     foodRecipes[i].gameObject.SetActive(true);
+                    foodRecipes[i].SetFoodId(foodId);
+                    foodRecipes[i].SetClickCallback(() => OnFoodRecipeClicked(foodId));
                     continue;
                 }
 
+                foodRecipes[i].ClearClickCallback();
                 foodRecipes[i].gameObject.SetActive(false);
             }
+        }
+
+        private void OnFoodRecipeClicked(string foodId)
+        {
+            foodRecipeViewModel.UpdateCurrentFoodId(foodId);
         }
 
         private void RebuildPageDot(int pageCount)
@@ -150,6 +164,23 @@ namespace Cooking
             }
 
             foodRecipeViewModel.CurrentFoodIdsInPage.Subscribe(UpdateFoodRecipeDisplay).AddTo(disposables);
+        }
+
+        private void ResetFoodRecipeSelection()
+        {
+            if (disposables == null)
+            {
+                Debug.LogWarning($"{nameof(FoodRecipeView)}: Disposables is null");
+                return;
+            }
+
+            foodRecipeViewModel.CurrentFoodId.Subscribe(foodId =>
+            {
+                foreach (var foodRecipe in foodRecipes)
+                {
+                    foodRecipe.SetSelected(foodRecipe.FoodId == foodId);
+                }
+            }).AddTo(disposables);
         }
     }
 }

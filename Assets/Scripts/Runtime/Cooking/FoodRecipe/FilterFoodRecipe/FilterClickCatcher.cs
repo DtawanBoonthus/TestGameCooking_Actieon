@@ -20,7 +20,7 @@ namespace Cooking
 
         public void ClearOnCloseOptionPanel()
         {
-            OnCloseOptionPanel -= ClosePanel;
+            OnCloseOptionPanel = null;
         }
 
         public void OnPointerDown(PointerEventData eventData)

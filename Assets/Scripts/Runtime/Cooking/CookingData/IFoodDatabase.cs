@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Cooking
+namespace Cooking;
+
+public interface IFoodDatabase
 {
-    public interface IFoodDatabase
-    {
-        IReadOnlyDictionary<string, Food> Foods { get; }
-        Food GetById(string foodId);
-    }
+    IReadOnlyDictionary<string, Food> Foods { get; }
+    Food GetById(string foodId);
 }
