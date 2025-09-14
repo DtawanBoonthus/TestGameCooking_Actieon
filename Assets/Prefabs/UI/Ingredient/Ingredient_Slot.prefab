@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8301702745898677552}
+  - component: {fileID: 6804750461736710569}
   m_Layer: 5
   m_Name: Ingredient_Slot
   m_TagString: Untagged
@@ -36,6 +37,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 221, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6804750461736710569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694615994974202162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47bb2fed00b046599104736d0f7f164e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientImage: {fileID: 1106771397313905576}
+  ingredientCountTMP: {fileID: 295038756767405595}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  emptyColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &6018533819071483729
 GameObject:
   m_ObjectHideFlags: 0

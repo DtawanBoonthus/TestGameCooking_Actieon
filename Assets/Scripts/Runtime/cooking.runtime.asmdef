@@ -1,7 +1,17 @@
 {
     "name": "cooking.runtime",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:593a5b492d29ac6448b1ebf7f035ef33",
+        "GUID:84651a3751eca9349aac36a66bba901b",
+        "GUID:68765d262e2128e4ab49c983f3411946",
+        "GUID:72d1fea872bd7a449bf3818f2b0a6708"
+    ],
     "includePlatforms": [
         "Android",
         "Editor",
