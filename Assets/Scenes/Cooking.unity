@@ -1714,6 +1714,7 @@ MonoBehaviour:
   gainFoodTMP: {fileID: 29279459}
   gainFoodButton: {fileID: 1879962193}
   gainFoodImage: {fileID: 558097344}
+  cookingTimeTMP: {fileID: 1246987432}
   idleAnimation: {fileID: 11400000, guid: 526cc414f05d3d84c9114ea067f3bd8d, type: 2}
   cookingAnimation: {fileID: 11400000, guid: 808eb5124386bcc4ea1c6494a7851460, type: 2}
   succeededAnimation: {fileID: 11400000, guid: f46efa500ff882a4e941285f5a774d08, type: 2}

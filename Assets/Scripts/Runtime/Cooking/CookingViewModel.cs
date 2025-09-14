@@ -14,12 +14,14 @@ namespace Cooking
     public class CookingViewModel : ICookingViewModel, IAsyncStartable, IDisposable
     {
         private readonly ReactiveProperty<bool> canCooking = new(false);
+        private readonly ReactiveProperty<TimeSpan> cookingTime = new();
         private readonly ReactiveProperty<float> currentEnergyNormalize = new(0);
         private readonly ReactiveProperty<Food?> gainFood = new();
         private readonly ReactiveProperty<CookingState> currentCookingState = new(CookingState.Preparing);
 
         public bool IsImagePreloaded { get; set; } = false;
         public ReadOnlyReactiveProperty<bool> CanCooking => canCooking;
+        public ReadOnlyReactiveProperty<TimeSpan> CookingTime => cookingTime;
         public ReadOnlyReactiveProperty<CookingState> CurrentCookingState => currentCookingState;
         public ReadOnlyReactiveProperty<float> CurrentEnergyNormalize => currentEnergyNormalize;
         public int MaxEnergy => gameConfigDatabase.MaxCookingEnergy;
@@ -37,7 +39,7 @@ namespace Cooking
         public async UniTask StartAsync(CancellationToken cancellation)
         {
             await UniTask.WaitUntil(() => IsImagePreloaded, cancellationToken: cancellation);
-            await LoadPendingCookingAsync(cancellation);
+            LoadPendingCookingAsync(cancellation).Forget();
 
             playerData.Energy.Subscribe(energy =>
             {
@@ -84,8 +86,9 @@ namespace Cooking
                 throw;
             }
 
+            cookingTime.Value = TimeSpan.FromSeconds(food.CookingTimeSecond);
             await UniTask.Delay(TimeSpan.FromSeconds(food.CookingTimeSecond), ignoreTimeScale: true, cancellationToken: cancellationToken);
-
+            cookingTime.Value = TimeSpan.Zero;
             saveLoadService.Save(SaveLoadKey.PENDING_COOKING, null);
             gainFood.Value = food;
             currentCookingState.Value = CookingState.Succeeded;
@@ -133,13 +136,13 @@ namespace Cooking
             return true;
         }
 
-        private async UniTask LoadPendingCookingAsync(CancellationToken cancellation)
+        private UniTask LoadPendingCookingAsync(CancellationToken cancellation)
         {
             var pending = saveLoadService.Load<PendingCooking>(SaveLoadKey.PENDING_COOKING);
 
             if (pending == null)
             {
-                return;
+                return UniTask.CompletedTask;
             }
 
             var now = DateTime.UtcNow;
@@ -151,11 +154,12 @@ namespace Cooking
                 gainFood.Value = food;
                 currentCookingState.Value = CookingState.Succeeded;
                 saveLoadService.Save(SaveLoadKey.PENDING_COOKING, null);
-                return;
+                return UniTask.CompletedTask;
             }
 
             currentCookingState.Value = CookingState.Cooking;
-            await ContinueCookingAsync(pending.FoodId, finish - now, cancellation);
+            ContinueCookingAsync(pending.FoodId, finish - now, cancellation).Forget();
+            return UniTask.CompletedTask;
         }
 
         private async UniTask ContinueCookingAsync(string foodId, TimeSpan remaining, CancellationToken cancellationToken)
@@ -165,9 +169,9 @@ namespace Cooking
                 FoodId = foodId,
                 FinishTime = DateTime.UtcNow.Add(remaining)
             });
-
+            cookingTime.Value = remaining;
             await UniTask.Delay(remaining, cancellationToken: cancellationToken, ignoreTimeScale: true);
-
+            cookingTime.Value = TimeSpan.Zero;
             if (cancellationToken.IsCancellationRequested)
             {
                 return;

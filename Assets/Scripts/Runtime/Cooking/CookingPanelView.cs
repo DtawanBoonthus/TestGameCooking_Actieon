@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Cooking.Services;
 using Cooking.Utilities;
 using Cysharp.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace Cooking
         [SerializeField] private TextMeshProUGUI gainFoodTMP = null!;
         [SerializeField] private GenericButton gainFoodButton = null!;
         [SerializeField] private Image gainFoodImage = null!;
+        [SerializeField] private TextMeshProUGUI cookingTimeTMP = null!;
 
         [SerializeField] private AnimationReferenceAsset idleAnimation = null!;
         [SerializeField] private AnimationReferenceAsset cookingAnimation = null!;
@@ -35,6 +37,7 @@ namespace Cooking
         [Inject] private readonly ICookingViewModel cookingViewModel = null!;
 
         private readonly CompositeDisposable disposables = new();
+        private CancellationTokenSource? countdownCts;
 
         private void Start()
         {
@@ -42,7 +45,8 @@ namespace Cooking
             cookingButton.SetClickCallback(OnCookingButtonClicked);
             closeButton.SetClickCallback(OnCloseButtonClicked);
             startCookingButton.SetClickCallback(OnStartCookingButtonClicked);
-            
+
+            cookingViewModel.CookingTime.Subscribe(OnCookingTimeChanged).AddTo(disposables);
             cookingViewModel.GainFood.Subscribe(GainFoodChanged).AddTo(disposables);
             cookingViewModel.CurrentEnergyNormalize.Subscribe(OnEnergyChanged).AddTo(disposables);
             cookingViewModel.CurrentCookingState.Subscribe(OnCookingStatusChange).AddTo(disposables);
@@ -56,6 +60,10 @@ namespace Cooking
             cookingButton.ClearClickCallback();
             closeButton.ClearClickCallback();
             startCookingButton.ClearClickCallback();
+
+            countdownCts?.Cancel();
+            countdownCts?.Dispose();
+            countdownCts = null;
             Debug.Log($"{nameof(CookingPanelView)}: Disposed");
         }
 
@@ -136,6 +144,64 @@ namespace Cooking
 
             var state = potSpine.AnimationState;
             state.AddAnimation(0, animRef, loop, delay);
+        }
+
+        private void OnCookingTimeChanged(TimeSpan cookingTime)
+        {
+            StopCountdown();
+
+            if (cookingTime <= TimeSpan.Zero)
+            {
+                cookingTimeTMP.SetText(FormatMinSecCeil(cookingTime));
+                return;
+            }
+
+            cookingTimeTMP.SetText(FormatMinSecCeil(cookingTime));
+            countdownCts = new CancellationTokenSource();
+            CountdownAsync(cookingTime, countdownCts.Token).Forget();
+        }
+
+        private void StopCountdown()
+        {
+            countdownCts?.Cancel();
+            countdownCts?.Dispose();
+            countdownCts = null;
+        }
+
+        private async UniTaskVoid CountdownAsync(TimeSpan startTime, CancellationToken cancellationToken)
+        {
+            var remaining = startTime;
+
+            while (remaining > TimeSpan.Zero && !cancellationToken.IsCancellationRequested)
+            {
+                cookingTimeTMP.SetText(FormatMinSecCeil(remaining));
+
+
+                await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
+
+                remaining -= TimeSpan.FromSeconds(Time.unscaledDeltaTime);
+
+                if (remaining < TimeSpan.Zero)
+                {
+                    remaining = TimeSpan.Zero;
+                }
+            }
+
+            cookingTimeTMP.SetText(FormatMinSecCeil(remaining));
+        }
+
+        private static string FormatMinSecCeil(TimeSpan timeSpan)
+        {
+            if (timeSpan < TimeSpan.Zero)
+            {
+                timeSpan = TimeSpan.Zero;
+            }
+
+            var totalSeconds = (int)Math.Ceiling(timeSpan.TotalSeconds);
+
+            var m = totalSeconds / 60;
+            var s = totalSeconds % 60;
+            return $"{m}:{s:00}";
         }
     }
 }

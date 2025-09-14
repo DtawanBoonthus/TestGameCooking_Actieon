@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using R3;
 
@@ -8,6 +9,7 @@ namespace Cooking
     {
         bool IsImagePreloaded { get; set; }
         ReadOnlyReactiveProperty<bool> CanCooking { get; }
+        ReadOnlyReactiveProperty<TimeSpan> CookingTime { get; }
         ReadOnlyReactiveProperty<CookingState> CurrentCookingState { get; }
         ReadOnlyReactiveProperty<float> CurrentEnergyNormalize { get; }
         int MaxEnergy { get; }
